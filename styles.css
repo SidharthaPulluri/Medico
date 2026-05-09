@@ -11,9 +11,9 @@
   --amber: #f2b84b;
   --rose: #d75b54;
   --blue: #437b9f;
-  --radius: 26px;
+  --radius: 18px;
   --font: "Segoe UI", Aptos, system-ui, sans-serif;
-  --display: ui-serif, Georgia, "Times New Roman", serif;
+  --display: "Segoe UI", Aptos, system-ui, sans-serif;
   color: var(--ink);
   font-family: var(--font);
 }
@@ -27,8 +27,7 @@ body {
   min-height: 100vh;
   margin: 0;
   background:
-    radial-gradient(circle at 16% 18%, rgba(215, 243, 107, 0.16), transparent 28%),
-    linear-gradient(135deg, #101612 0%, #17251d 55%, #241923 100%);
+    linear-gradient(135deg, #101612 0%, #17251d 62%, #151813 100%);
 }
 
 button,
@@ -53,7 +52,7 @@ svg {
 }
 
 .route-app {
-  width: min(1480px, 100%);
+  width: min(1360px, 100%);
   min-height: 100vh;
   margin: 0 auto;
   padding: 18px;
@@ -142,11 +141,16 @@ svg {
 
 .route-input,
 .routing-slate,
-.check-screen,
-.result-shell {
+.check-screen {
   border-radius: var(--radius);
   background: var(--panel);
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.24);
+  box-shadow: 0 14px 44px rgba(0, 0, 0, 0.18);
+}
+
+.result-shell {
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
 }
 
 .route-input {
@@ -187,9 +191,9 @@ h4 {
 .input-heading h1 {
   max-width: 760px;
   margin: 10px 0 28px;
-  font-size: clamp(54px, 8vw, 118px);
-  line-height: 0.88;
-  letter-spacing: -0.01em;
+  font-size: clamp(40px, 6vw, 84px);
+  line-height: 1;
+  letter-spacing: 0;
 }
 
 .symptom-field {
@@ -204,13 +208,13 @@ h4 {
 textarea {
   width: 100%;
   min-height: 245px;
-  border: 2px solid #2a382f;
-  border-radius: 24px;
-  padding: 22px;
+  border: 1px solid #2a382f;
+  border-radius: 16px;
+  padding: 18px;
   resize: vertical;
   background: #fffefa;
   color: var(--ink);
-  font-size: 22px;
+  font-size: 18px;
   line-height: 1.45;
   outline: none;
 }
@@ -256,12 +260,12 @@ textarea::placeholder {
 .secondary-button,
 .map-link {
   display: inline-flex;
-  min-height: 50px;
+  min-height: 42px;
   align-items: center;
   justify-content: center;
   border-radius: 999px;
-  padding: 0 22px;
-  font-weight: 950;
+  padding: 0 16px;
+  font-weight: 850;
   text-decoration: none;
 }
 
@@ -283,7 +287,7 @@ textarea::placeholder {
 }
 
 .secondary-button.small {
-  min-height: 42px;
+  min-height: 38px;
 }
 
 .routing-slate {
@@ -336,8 +340,16 @@ textarea::placeholder {
 .check-screen,
 .result-shell {
   margin-top: 18px;
+  padding: clamp(18px, 3vw, 34px);
+}
+
+.check-screen {
   min-height: calc(100vh - 122px);
-  padding: clamp(22px, 4vw, 52px);
+}
+
+.result-shell {
+  min-height: auto;
+  padding-inline: 0;
 }
 
 .check-header,
@@ -352,8 +364,8 @@ textarea::placeholder {
 
 .provider-toolbar h2 {
   margin-bottom: 0;
-  font-size: 31px;
-  line-height: 1.1;
+  font-size: 25px;
+  line-height: 1.2;
 }
 
 .provider-toolbar {
@@ -367,8 +379,16 @@ textarea::placeholder {
 .check-header h1,
 .result-header h1 {
   margin: 6px 0 0;
-  font-size: clamp(44px, 6vw, 82px);
-  line-height: 0.95;
+  font-size: clamp(34px, 4vw, 54px);
+  line-height: 1.05;
+}
+
+.result-shell .result-header span {
+  color: var(--lime);
+}
+
+.result-shell .result-header h1 {
+  color: white;
 }
 
 .result-header > span,
@@ -384,13 +404,15 @@ textarea::placeholder {
   width: auto;
   min-width: 96px;
   padding-inline: 20px;
+  border-color: rgba(255, 255, 255, 0.5);
+  color: white;
 }
 
 .route-review {
   display: grid;
   grid-template-columns: 340px minmax(0, 1fr);
   gap: 18px;
-  margin-top: 26px;
+  margin-top: 18px;
 }
 
 .analysis-panel,
@@ -402,7 +424,7 @@ textarea::placeholder {
 .explain-card,
 .places-status,
 .provider-card {
-  border-radius: 22px;
+  border-radius: 12px;
 }
 
 .analysis-panel {
@@ -485,25 +507,34 @@ textarea::placeholder {
 
 .results {
   display: grid;
-  grid-template-columns: minmax(340px, 0.82fr) minmax(0, 1.18fr);
-  gap: 18px;
-  margin-top: 24px;
+  grid-template-columns: 360px minmax(0, 1fr);
+  gap: 20px;
+  margin-top: 18px;
+  align-items: start;
 }
 
-.answer-panel,
+.answer-panel {
+  border: 1px solid var(--line);
+  padding: 14px;
+  background: var(--panel-2);
+  border-radius: var(--radius);
+}
+
 .provider-panel {
   border: 1px solid var(--line);
   padding: 18px;
-  background: var(--panel-2);
+  background: #fffefa;
+  border-radius: var(--radius);
 }
 
 .triage-card {
-  padding: 22px;
+  padding: 16px;
+  border: 1px solid transparent;
 }
 
 .triage-card h3,
 .provider-card h4 {
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   font-family: var(--display);
 }
 
@@ -525,8 +556,8 @@ textarea::placeholder {
 .summary-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  margin: 10px 0;
+  gap: 8px;
+  margin: 8px 0;
 }
 
 .summary-card,
@@ -534,15 +565,15 @@ textarea::placeholder {
 .places-status,
 .provider-card {
   border: 1px solid var(--line);
-  padding: 16px;
+  padding: 12px;
   background: white;
 }
 
 .summary-card strong {
   display: block;
-  margin-top: 7px;
+  margin-top: 4px;
   font-family: var(--display);
-  font-size: 26px;
+  font-size: 20px;
 }
 
 .explain-card ul {
@@ -568,22 +599,22 @@ textarea::placeholder {
 }
 
 .toolbar-actions {
-  justify-content: flex-end;
+  justify-content: flex-start;
   align-items: end;
 }
 
 .toolbar-actions select {
-  width: 210px;
+  width: 190px;
 }
 
 .toolbar-actions .secondary-button {
-  min-width: 136px;
+  min-width: 118px;
 }
 
 .address-search {
   display: grid;
   gap: 5px;
-  min-width: min(100%, 280px);
+  min-width: min(100%, 260px);
 }
 
 .address-search span {
@@ -636,28 +667,29 @@ input {
 
 .provider-list {
   display: grid;
-  gap: 10px;
+  gap: 8px;
   margin-top: 12px;
 }
 
 .provider-card {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 132px;
+  grid-template-columns: minmax(0, 1fr) 120px;
   gap: 12px;
 }
 
 .provider-card h4 {
-  font-size: 22px;
-  line-height: 1.15;
+  font-size: 18px;
+  line-height: 1.25;
 }
 
 .provider-card p {
-  margin-bottom: 10px;
+  margin-bottom: 8px;
+  font-size: 14px;
 }
 
 .tag {
   border-radius: 999px;
-  padding: 5px 8px;
+  padding: 4px 7px;
   background: #eaf4dc;
   color: #31501f;
   font-size: 11px;
@@ -673,22 +705,22 @@ input {
 
 .score {
   color: var(--green);
-  font-size: 30px;
+  font-size: 22px;
   font-weight: 950;
 }
 
 .cost {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 950;
 }
 
 .fine-print {
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .map-link {
-  min-height: 40px;
-  padding: 0 14px;
+  min-height: 34px;
+  padding: 0 12px;
   font-size: 13px;
 }
 
