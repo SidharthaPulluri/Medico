@@ -1832,11 +1832,19 @@ async function sortPlacesByDistance(places, origin) {
   if (!measuredPlaces.length) measuredPlaces = fallbackDistanceSort(placesWithCoords, origin);
   const allPlaces = [...measuredPlaces, ...placesWithoutCoords];
   const radiusMeters = searchRadiusMeters();
-  const inRadiusPlaces = allPlaces.filter((place) => Number.isFinite(place.distanceMeters) && place.distanceMeters <= radiusMeters);
-  const candidatePlaces = inRadiusPlaces.length ? inRadiusPlaces : allPlaces;
   const preference = distancePreference.value;
+  const rankedPlaces = sortRankedPlaces(allPlaces, preference);
+  const inRadiusPlaces = rankedPlaces.filter((place) => Number.isFinite(place.distanceMeters) && place.distanceMeters <= radiusMeters);
+  const outsideRadiusPlaces = rankedPlaces.filter((place) => !inRadiusPlaces.includes(place));
+  const candidatePlaces = inRadiusPlaces.length
+    ? [...inRadiusPlaces, ...outsideRadiusPlaces].slice(0, 9)
+    : rankedPlaces.slice(0, 9);
 
-  return candidatePlaces.sort((a, b) => {
+  return candidatePlaces;
+}
+
+function sortRankedPlaces(places, preference) {
+  return [...places].sort((a, b) => {
     const distanceA = a.distanceMeters ?? Number.POSITIVE_INFINITY;
     const distanceB = b.distanceMeters ?? Number.POSITIVE_INFINITY;
     if (preference === "nearby") {
