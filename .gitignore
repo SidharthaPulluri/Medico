@@ -8,3 +8,5 @@ __pycache__/
 tests/private_data/
 tests/benchmark_mimic*.csv
 ml-router-model.mimic-local.js
+
+.vercel
