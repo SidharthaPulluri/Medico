@@ -1,0 +1,14 @@
+{
+  "name": "carematch-india",
+  "version": "0.1.0",
+  "private": true,
+  "description": "CareMatch India doctor route finder prototype.",
+  "scripts": {
+    "start": "node server.js",
+    "check": "node --check app.js && node --check server.js && node --check api/medical-intake.js && node --check api/config.js",
+    "test": "node tests/run-evaluation.js tests/benchmark_cases.csv"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

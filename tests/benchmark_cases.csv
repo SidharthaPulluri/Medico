@@ -1,0 +1,39 @@
+case_id,symptoms,follow_up_answers,severity,onset,age_group,expected_condition,expected_specialty,expected_severity
+1,"sudden left side weakness and facial droop","speech;oneSide",8,hours,adult,stroke,Neurology,emergency
+2,"slight paralysis cramps mood swings since morning","oneSide",6,hours,adult,stroke,Neurology,emergency
+3,"worst headache with vision loss and dizziness","vision",7,hours,adult,stroke,Neurology,soon
+4,"one sided headache nausea light sensitivity","vision",5,days,adult,migraine,Neurology,soon
+5,"muscle cramps in legs after exercise","",3,days,adult,muscle_spasm,Neurology,routine
+6,"seizure and confusion after fainting","speech",8,minutes,adult,stroke,Neurology,emergency
+7,"chest pain sweating and pain going to left arm","sweat;exertion",9,minutes,adult,myocardial_infarction,Cardiology,emergency
+8,"chest pressure breathless climbing stairs","exertion;historyHeart",7,hours,older,myocardial_infarction,Cardiology,emergency
+9,"heart racing and irregular heartbeat","historyHeart",5,days,adult,arrhythmia,Cardiology,soon
+10,"palpitations at night no chest pain","",4,days,adult,arrhythmia,Cardiology,routine
+11,"fell from bike possible broken wrist","trauma",6,hours,adult,fracture,Orthopedics,soon
+12,"back pain with numb leg and bladder control problem","bladder",8,hours,adult,cauda_equina_red_flag,Orthopedics,emergency
+13,"knee joint pain swelling after running","",3,weeks,adult,fracture,Orthopedics,routine
+14,"panic attack fear heart racing cannot sleep","noSleep",5,days,adult,anxiety_panic,Psychiatry,soon
+15,"thoughts of self harm and hearing voices","unsafe;hallucination",8,hours,adult,suicidal_ideation,Psychiatry,emergency
+16,"confused disoriented not sleeping for two nights","hallucination;noSleep",7,hours,adult,suicidal_ideation,Psychiatry,emergency
+17,"stomach pain vomiting loose motion","",4,days,adult,viral_gastroenteritis,Gastroenterology,routine
+18,"blood in stool and black stool with weakness","rigid",8,hours,adult,gi_bleeding,Gastroenterology,emergency
+19,"vomiting diarrhea very thirsty dry mouth","feverGI",6,hours,child,viral_gastroenteritis,Gastroenterology,soon
+20,"severe belly pain hard abdomen blood vomit","rigid",8,hours,adult,gi_bleeding,Gastroenterology,emergency
+21,"cant breath chest tight sweating","sweat",9,minutes,adult,myocardial_infarction,Cardiology,emergency
+22,"left side weak lol speech weird","speech;oneSide",7,hours,adult,stroke,Neurology,emergency
+23,"migraine headache nausea but walking and speaking fine","",4,days,adult,migraine,Neurology,routine
+24,"loose motions from yesterday mild stomach cramps","",3,days,adult,viral_gastroenteritis,Gastroenterology,routine
+25,"accident leg pain cannot walk","trauma",7,hours,adult,fracture,Orthopedics,soon
+26,"bloated stomach loosemotions headache hot breath","",5,days,adult,viral_gastroenteritis,Gastroenterology,soon
+27,"burning urination and foul smelling urine","",4,days,adult,urinary_symptoms,Urology,soon
+28,"itching rash mild fever and tiredness","",4,days,adult,skin_rash_or_infection,Dermatology,soon
+29,"backpain cannot sit cannot stand for long time cannot bend due to pain","",6,days,adult,fracture,Orthopedics,soon
+30,"tooth ace from yesterday pain while chewing","",5,days,adult,toothache,Dentistry,soon
+31,"tooth pain gum swelling fever","faceSwelling;dentalFever",7,hours,adult,dental_abscess_red_flag,Dentistry,emergency
+32,"ear pain blocked ear discharge","",4,days,adult,ent_infection,ENT,soon
+33,"red eye sticky discharge and eye pain","",4,days,adult,eye_infection_or_irritation,Ophthalmology,soon
+34,"itching skin rash and pimples","",3,days,adult,skin_rash_or_infection,Dermatology,soon
+35,"cough wheezing asthma breathing problem","oxygenHistory",6,hours,adult,respiratory_symptoms,Pulmonology,soon
+36,"burning urination flank pain fever","urineFever",6,days,adult,urinary_symptoms,Urology,soon
+37,"pregnancy bleeding and pelvic pain","pregnantBleeding",8,hours,adult,obgyn_red_flag,Obstetrics and Gynaecology,emergency
+38,"baby fever not feeding very drowsy","babyYoung;childNotDrinking",8,hours,child,pediatric_red_flag,Pediatrics,emergency

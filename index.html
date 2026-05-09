@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CareMatch India | Doctor Route Finder</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="route-app" id="mainContent">
+      <header class="route-topbar">
+        <div class="wordmark">
+          <span aria-hidden="true">+</span>
+          <div>
+            <strong>CareMatch India</strong>
+            <small>Doctor route finder</small>
+          </div>
+        </div>
+        <p>Not a diagnosis. For severe, sudden, or worsening symptoms, seek urgent medical help.</p>
+        <button class="text-button" id="resetBtn" type="button">Clear</button>
+      </header>
+
+      <nav class="progress-rail" aria-label="Assessment progress">
+        <span class="progress-step active" id="progressSymptoms">Input</span>
+        <span class="progress-step" id="progressQuestions">Check</span>
+        <span class="progress-step" id="progressResults">Route</span>
+      </nav>
+
+      <form id="assessmentForm" autocomplete="off" data-form-type="other">
+        <section class="screen active" id="symptomScreen" aria-labelledby="symptomTitle">
+          <div class="route-grid">
+            <section class="route-input">
+              <div class="input-heading">
+                <span>Symptom text</span>
+                <h1 id="symptomTitle">Which doctor should I visit?</h1>
+              </div>
+
+              <label class="symptom-field">
+                <span class="field-label">Describe symptoms</span>
+                <textarea
+                  id="symptomInput"
+                  name="symptoms"
+                  rows="7"
+                  maxlength="2000"
+                  autocomplete="off"
+                  placeholder="Example: dry cough fever face puffness"
+                ></textarea>
+              </label>
+
+              <div class="quick-examples" aria-label="Example symptoms">
+                <button type="button" data-example="tooth ace">tooth ace</button>
+                <button type="button" data-example="kadupu noppi loose motions">kadupu noppi</button>
+                <button type="button" data-example="ear pain blocked ear">ear pain</button>
+                <button type="button" data-example="baby fever not feeding very drowsy">baby fever</button>
+              </div>
+
+              <div class="primary-actions">
+                <button class="primary-button" id="analyzeBtn" type="button">Find route</button>
+                <button class="secondary-button" id="sampleNeuroBtn" type="button">Run demo case</button>
+              </div>
+            </section>
+
+            <aside class="routing-slate" aria-label="How routing works">
+              <div class="slate-media">
+                <img src="assets/clinical-consultation.png" alt="" width="1536" height="1024" />
+              </div>
+              <div class="slate-copy">
+                <strong>Output is a doctor type, not a disease name.</strong>
+                <span>Specialist when clear. General Physician when mixed. Emergency when red flags appear.</span>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <section class="screen check-screen" id="questionScreen" aria-labelledby="questionTitle">
+          <div class="check-header">
+            <div>
+              <span>Safety check</span>
+              <h1 id="questionTitle">Confirm what is present.</h1>
+            </div>
+            <button class="secondary-button" id="backToSymptomsBtn" type="button">Edit symptoms</button>
+          </div>
+
+          <div class="route-review">
+            <aside class="analysis-panel hidden" id="analysisPanel">
+              <span class="analysis-label">Detected area</span>
+              <strong id="detectedArea">General health review</strong>
+              <p id="detectedReason">I matched your description to a care area.</p>
+              <label class="hidden">
+                Adjust if needed
+                <select id="categoryReview" name="categoryReview"></select>
+              </label>
+            </aside>
+
+            <section class="question-column">
+              <fieldset id="suggestedSymptomsField" class="question-block hidden">
+                <legend>Matched symptoms</legend>
+                <div class="symptom-list" id="symptomOptions"></div>
+              </fieldset>
+
+              <fieldset id="dynamicQuestions" class="question-block dynamic-questions hidden"></fieldset>
+
+              <div class="hidden">
+                <input id="severity" name="severity" type="range" min="1" max="10" value="4" />
+                <span id="severityValue">4</span>
+                <select id="onset" name="onset">
+                  <option value="minutes">Within minutes</option>
+                  <option value="hours">Within hours</option>
+                  <option value="days" selected>1-3 days ago</option>
+                  <option value="weeks">More than a week ago</option>
+                </select>
+                <select id="ageGroup" name="ageGroup">
+                  <option value="child">Under 18</option>
+                  <option value="adult" selected>18-64</option>
+                  <option value="older">65+</option>
+                </select>
+                <input id="location" name="location" value="near me" autocomplete="off" data-form-type="other" />
+                <select id="budget" name="budget">
+                  <option value="balanced" selected>Balanced cost and quality</option>
+                  <option value="budget">Lowest reasonable cost</option>
+                  <option value="quality">Highest quality first</option>
+                </select>
+                <select id="distancePreference" name="distancePreference">
+                  <option value="nearby" selected>Nearby first</option>
+                  <option value="balanced">Balanced distance and quality</option>
+                  <option value="wide">Wider search for better options</option>
+                </select>
+                <input id="mapsApiKey" name="mapsApiKey" type="hidden" autocomplete="off" data-form-type="other" />
+              </div>
+
+              <button class="primary-button wide" type="submit">Show recommendation</button>
+            </section>
+          </div>
+        </section>
+      </form>
+
+      <section class="screen results-screen" id="resultsScreen" aria-live="polite" aria-labelledby="resultsTitle">
+        <div class="result-shell">
+          <header class="result-header">
+            <span>Recommended next step</span>
+            <h1 id="resultsTitle">Doctor route</h1>
+            <button class="secondary-button" id="printBtn" type="button">Print</button>
+          </header>
+
+          <div id="emptyState" class="empty-state hidden"></div>
+
+          <div id="results" class="results hidden">
+            <section class="answer-panel">
+              <div class="triage-card" id="triageCard"></div>
+              <div class="summary-grid" id="summaryGrid"></div>
+              <div class="explain-card" id="explainCard"></div>
+            </section>
+
+            <section class="provider-panel">
+              <div class="provider-toolbar">
+                <h2>Where to look</h2>
+                <div class="toolbar-actions">
+                  <label class="address-search">
+                    <span>Search near</span>
+                    <input
+                      id="addressInput"
+                      name="careArea"
+                      type="text"
+                      value="near me"
+                      autocomplete="street-address"
+                      placeholder="Enter area, city, pincode, or address"
+                    />
+                  </label>
+                  <button class="secondary-button small" id="applyAddressBtn" type="button">Search</button>
+                  <label class="distance-control">
+                    <span>Distance</span>
+                    <input id="distanceRange" type="range" min="0" max="2" step="1" value="0" aria-label="Search distance" />
+                    <output id="distanceLabel">Closest</output>
+                  </label>
+                  <select id="sortProviders" name="sortProviders" aria-label="Sort providers">
+                    <option value="fit">Best route</option>
+                    <option value="cost">Cost-conscious route</option>
+                    <option value="rating">Higher-quality route</option>
+                  </select>
+                  <button class="secondary-button small" id="useLocationBtn" type="button">Use location</button>
+                </div>
+              </div>
+              <div id="placesStatus" class="places-status"></div>
+              <div id="providerList" class="provider-list"></div>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <p class="legal-line">
+        CareMatch provides informational care-routing guidance only. It is not a diagnosis, prescription, or replacement
+        for a qualified clinician.
+      </p>
+    </main>
+
+    <script>
+      document.addEventListener("click", (event) => {
+        const button = event.target.closest("[data-example]");
+        if (!button) return;
+        const input = document.getElementById("symptomInput");
+        input.value = button.dataset.example;
+        input.focus();
+      });
+    </script>
+    <script src="/api/config.js"></script>
+    <script src="config.local.js"></script>
+    <script src="ml-router-model.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

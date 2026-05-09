@@ -1,0 +1,1 @@
+window.CAREMATCH_CONFIG = window.CAREMATCH_CONFIG || {};
