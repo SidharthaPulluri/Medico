@@ -144,16 +144,19 @@
           <div class="check-header">
             <div>
               <span>Safety check</span>
-              <h1 id="questionTitle">Confirm what is present.</h1>
+              <h1 id="questionTitle">Let's confirm your symptoms</h1>
+              <p>Select all that apply. This helps us understand better and guide you to the right care.</p>
             </div>
             <button class="secondary-button" id="backToSymptomsBtn" type="button">Edit symptoms</button>
           </div>
 
           <div class="route-review">
             <aside class="analysis-panel hidden" id="analysisPanel">
+              <div class="safety-emblem" aria-hidden="true">OK</div>
               <span class="analysis-label">Detected area</span>
               <strong id="detectedArea">General health review</strong>
               <p id="detectedReason">I matched your description to a care area.</p>
+              <div class="privacy-note">This is not a diagnosis. Please confirm the symptoms to get the most relevant recommendation.</div>
               <label class="hidden">
                 Adjust if needed
                 <select id="categoryReview" name="categoryReview"></select>
