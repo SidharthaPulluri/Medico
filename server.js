@@ -184,11 +184,17 @@ function ensureLocalIntakeWorker() {
   if (localIntakeWorker && !localIntakeWorker.killed) return localIntakeReady;
 
   localIntakeBuffer = "";
-  localIntakeWorker = spawn("python", [path.join(root, "tools", "local-medical-intake-worker.py")], {
-    cwd: root,
-    windowsHide: true,
-    stdio: ["pipe", "pipe", "pipe"],
-  });
+  try {
+    localIntakeWorker = spawn("python", [path.join(root, "tools", "local-medical-intake-worker.py")], {
+      cwd: root,
+      windowsHide: true,
+      stdio: ["pipe", "pipe", "pipe"],
+    });
+  } catch (error) {
+    localIntakeWorker = null;
+    localIntakeReady = Promise.reject(error);
+    return localIntakeReady;
+  }
 
   localIntakeReady = new Promise((resolve, reject) => {
     const startupTimer = setTimeout(() => reject(new Error("Local model worker startup timed out.")), 30000);
@@ -211,7 +217,13 @@ function ensureLocalIntakeWorker() {
         localIntakeQueue.shift().reject(new Error("Local intake worker exited."));
       }
     });
-    localIntakeWorker.on("error", reject);
+    localIntakeWorker.on("error", (error) => {
+      localIntakeWorker = null;
+      while (localIntakeQueue.length) {
+        localIntakeQueue.shift().reject(error);
+      }
+      reject(error);
+    });
   });
 
   return localIntakeReady;

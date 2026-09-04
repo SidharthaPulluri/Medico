@@ -1,13 +1,31 @@
 {
   "version": 2,
-  "rewrites": [
+  "builds": [
     {
-      "source": "/api/config.js",
-      "destination": "/api/config.js"
+      "src": "api/**/*.js",
+      "use": "@vercel/node"
     },
     {
-      "source": "/api/medical-intake",
-      "destination": "/api/medical-intake.js"
+      "src": "**/*",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/medical-intake",
+      "dest": "/api/medical-intake.js"
+    },
+    {
+      "src": "/api/config.js",
+      "dest": "/api/config.js"
+    },
+    {
+      "src": "/",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
     }
   ],
   "headers": [
